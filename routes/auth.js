@@ -11,10 +11,10 @@ router.get("/login", function(req, res) {
     res.render("login", parms);*/
 });
 
-router.get("/authorize", function(req, res) {
-    var authCode = req.query.code;
+router.get("/authorize", async function(req, res) {
+    var authCode = await req.query.code;
     if (authCode) {
-        auth_controller.authorize(req, res, authCode)
+        auth_controller.authorize(req, res, authCode);
     } else {
     }
 });

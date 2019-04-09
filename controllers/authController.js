@@ -33,20 +33,27 @@ module.exports = {
   },
 
   authorize: async function(req, res, authCode) {
-    const options = {
+    const authOptions = {
       authCode,
       redirect_uri: redirectUri
     };
 
     try {
-      const result = await oauth2.authorizationCode.getToken(options);
-      const token = oauth2.accessToken.create(result);
-      cookies.setCookie(
-        req,
-        res,
-        "graph_access_token",
-        token.token.access_token
-      );
+      oauth2.authorizationCode
+        .getToken(authOptions)
+        .then(result => {
+          const token = oauth2.accessToken.create(result);
+          cookies.setCookie(
+            req,
+            res,
+            "graph_access_token",
+            token.token.access_token
+          );
+        })
+        .catch(error => {
+          console.log("Access Token Error", error.message);
+          return res.status(500).json("Authentication failed");
+        });
     } catch (error) {
       console.log(error);
 
@@ -54,14 +61,7 @@ module.exports = {
     }
 
     var graph_token = cookies.getCookie(req, res, "graph_access_token");
-    var emailadress = this.getEmail(
-      req,
-      res,
-      graph_token
-    );
-    console.log("hoi");
-    console.log(emailadress);
-    console.log("hoi");
+    var emailadress = this.getEmail(req, res, graph_token);
     var options = {
       method: "POST",
       url: consts.API_URL + "/auth/login",
