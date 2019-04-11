@@ -11,8 +11,10 @@
     "@microsoft/microsoft-graph-client": "^1.5.2",
     "bcrypt": "^3.0.5",
     "body-parser": "^1.18.3",
+    "bootstrap": "^4.3.1",
     "cookie": "^0.3.1",
     "cookie-parser": "^1.4.4",
+    "cookies": "^0.7.3",
     "debug": "~2.6.9",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
@@ -21,10 +23,11 @@
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.4.19",
+    "memory-cache": "^0.2.0",
+    "mongoose": "^5.5.0",
     "morgan": "~1.9.0",
     "msal": "^0.2.4",
-    "nodemon": "^1.18.10",
+    "nodemon": "^1.18.11",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
@@ -34,6 +37,6 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.0.2"
+    "mocha": "^6.1.2"
   }
 }

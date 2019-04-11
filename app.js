@@ -3,7 +3,10 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+
 const authRouter = require('./routes/auth');
+const indexRouter = require('./routes/index');
+
 const exphbs  = require('express-handlebars');
 
 var app = express();
@@ -21,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use( bodyParser.urlencoded({ extended : false }) );
 
 app.use('/auth', authRouter);
+app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

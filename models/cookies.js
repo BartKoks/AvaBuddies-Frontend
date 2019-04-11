@@ -1,17 +1,15 @@
 var express = require("express");
-var cookieParser = require("cookie-parser");
-var app = express();
-app.use(cookieParser());
+const cache = require('memory-cache');
 
 module.exports = {
   setCookie: function(req, res, cookieName, cookieValue) {
-    res.cookie(cookieName, cookieValue, { maxAge: 900000, httpOnly: true });
+    cache.put(cookieName, cookieValue, 21600000, function(key, value) {//6 hours
+  });
   },
 
   getCookie: function(req, res, cookieName) {
-    var cookieValue = req.cookies[cookieName];
-    if (cookieValue) {
-      return cookieValue;
-    }
+    console.log(cache.cookieName);
+    var cookieValue = cache.get(cookieName);
+    return cookieValue;
   }
 };

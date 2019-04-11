@@ -5,10 +5,6 @@ var auth_controller = require("../controllers/authController");
 
 router.get("/login", function(req, res) {
   res.redirect(auth_controller.getLoginURL(req, res));
-
-  /*let parms = { title: "Login"};
-  
-    res.render("login", parms);*/
 });
 
 router.get("/authorize", async function(req, res) {
