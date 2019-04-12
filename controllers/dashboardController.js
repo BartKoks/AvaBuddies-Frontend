@@ -4,11 +4,11 @@ const request = require("request");
 const cookies = require("../models/cookies.js");
 
 module.exports = {
-  getUsers: async function(req, res) {
+  getUsers: async function(req, res, params) {
     var token = "Bearer ";
     var token = token + cookies.getCookie(req, res, "backend_token");
     console.log("token test");
-    console.log(cookies.getCookie(req,res, "backend_token"));
+    console.log(cookies.getCookie(req, res, "backend_token"));
     var options = {
       method: "GET",
       url: consts.API_URL + "/user/list",
@@ -21,8 +21,12 @@ module.exports = {
     request(options, function(error, response, body) {
       if (error) throw new Error(error);
       console.log(body);
-      //var objectValue = JSON.parse(body);
-      //return objectValue["users"];
+      var objectValue = JSON.parse(body);
+      var userList = objectValue["users"];
+      res.render("/", {
+        users: users,
+        parameters: params
+      });
     });
   }
 };

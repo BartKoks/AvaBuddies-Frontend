@@ -72,7 +72,6 @@ module.exports = {
     request(options, function(error, response, body) {
       if (error) throw new Error(error);
       var objectValue = JSON.parse(body);
-
       cookies.setCookie(
         req,
         res,
@@ -96,7 +95,6 @@ module.exports = {
       try {
         // Get the 10 newest messages from inbox
         const result = await client.api("/me/mail").get();
-        console.log(result);
         return result.value;
       } catch (err) {
         res.render("error", err);
