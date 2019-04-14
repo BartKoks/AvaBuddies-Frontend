@@ -1,13 +1,13 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
 
-var dashboard_controller = require("../controllers/dashboardController.js");
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  let params = {
+    active: { home: true }
+  };
 
-router.get("/", async function(req, res) {
-  let parms = { title: "Dashboard" };
-
-  await dashboard_controller.getUsers(req, res, parms);
-  res.render("dashboard", { parameters: parms });
+  res.render('index', params);
 });
 
 module.exports = router;
