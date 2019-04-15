@@ -93,6 +93,19 @@ var authRouter = require('./routes/auth');
 
 var app = express();
 
+app.all('*', checkUser);
+
+function checkUser(req, res, next) {
+  if ( req.path == '/' || req.path == '/auth/signin' || req.path == '/auth/callback' || req.path == '/auth/signin-backend' || req.path == '/auth/signout') return next();
+
+  if(req.app.locals.isAdmin){
+    next();
+  }
+  else{
+    res.redirect("/");
+  }
+}
+
 // Session middleware
 // NOTE: Uses default in-memory session store, which is not
 // suitable for production

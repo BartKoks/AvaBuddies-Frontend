@@ -2,6 +2,7 @@ var express = require("express");
 var passport = require("passport");
 var router = express.Router();
 var request = require("request");
+var jwt_decode = require('jwt-decode');
 
 /* GET auth callback. */
 router.get(
@@ -51,6 +52,8 @@ router.post("/signin-backend", function(req, res, next) {
     if (error) throw new Error(error);
     var objectValue = JSON.parse(body);
     req.app.locals.token = objectValue["token"];
+    var decoded = jwt_decode(objectValue["token"]);
+    req.app.locals.isAdmin = decoded.user.isAdmin;
   });
   res.redirect("/");
 });
