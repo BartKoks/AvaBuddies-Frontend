@@ -93,11 +93,8 @@ var authRouter = require('./routes/auth');
 
 var app = express();
 
-app.all('*', checkUser);
 
 function checkUser(req, res, next) {
-  if ( req.path == '/' || req.path == '/auth/signin' || req.path == '/auth/callback' || req.path == '/auth/signin-backend' || req.path == '/auth/signout') return next();
-
   if(req.app.locals.isAdmin){
     next();
   }
@@ -157,7 +154,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//
+
 app.use(function(req, res, next) {
   // Set the authenticated user in the
   // template locals
@@ -168,7 +165,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/users', checkUser, usersRouter);
 app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
