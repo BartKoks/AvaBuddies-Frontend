@@ -2,7 +2,7 @@
 * Theme: Moltran - Responsive Bootstrap 4 Admin Dashboard
 * Author: Coderthemes
 * Component: Editable
-* 
+*
 */
 
 (function( $ ) {
@@ -44,7 +44,6 @@
 		build: function() {
 			this.datatable = this.$table.DataTable({
 				aoColumns: [
-					null,
 					null,
 					null,
 					{ "bSortable": false }

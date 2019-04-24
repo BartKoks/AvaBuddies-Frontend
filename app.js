@@ -95,11 +95,11 @@ var app = express();
 
 
 function checkUser(req, res, next) {
-  if(req.app.locals.isAdmin){
+  if(app.locals.user && app.locals.user.isAdmin){
     next();
   }
   else{
-    res.redirect("/");
+    res.redirect("/auth/login");
   }
 }
 
@@ -164,9 +164,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/', indexRouter);
 app.use('/users', checkUser, usersRouter);
 app.use('/auth', authRouter);
+app.use('/', checkUser, indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
