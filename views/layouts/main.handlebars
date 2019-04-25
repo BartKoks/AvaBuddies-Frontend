@@ -1,82 +1,145 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Node.js Graph Tutorial</title>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>AvaBuddies - AdminPanel</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-      integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <link rel='stylesheet' href='assets/css/style.css' />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-      integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-  </head>
+        <link rel="shortcut icon" href="assets/images/favicon_1.ico">
 
-  <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="container">
-        <a href="/" class="navbar-brand">Node.js Graph Tutorial</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a href="/" class="nav-link{{#if active.home}} active{{/if}}">Home</a>
-            </li>
-            {{#if user}}
-              <li class="nav-item" data-turbolinks="false">
-                <a href="/users" class="nav-link{{#if active.users}} active{{/if}}">Users</a>
-              </li>
-            {{/if}}
-          </ul>
-          <ul class="navbar-nav justify-content-end">
-            <li class="nav-item">
-              <a class="nav-link" href="https://developer.microsoft.com/graph/docs/concepts/overview" target="_blank">
-                <i class="fas fa-external-link-alt mr-1"></i>Docs
-              </a>
-            </li>
-            {{#if user}}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                  aria-expanded="false">
-                  {{#if user.avatar}}
-                    <img src="{{ user.avatar }}" class="rounded-circle align-self-center mr-2" style="width: 32px;">
-                  {{else}}
-                    <i class="far fa-user-circle fa-lg rounded-circle align-self-center mr-2" style="width: 32px;"></i>
-                  {{/if}}
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <h5 class="dropdown-item-text mb-0">{{ user.displayName }}</h5>
-                  <p class="dropdown-item-text text-muted mb-0">{{ user.email }}</p>
-                  <div class="dropdown-divider"></div>
-                  <a href="/auth/signout" class="dropdown-item">Sign Out</a>
+        <!-- Custom Files -->
+        <link href="/assets/pages/switchery/switchery.min.css" rel="stylesheet">
+        <link href="/assets/pages/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/icons.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
+
+        <script src="/assets/js/modernizr.min.js"></script>
+
+    </head>
+
+
+    <body class="fixed-left">
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Top Bar Start -->
+            <div class="topbar">
+                <!-- LOGO -->
+                <div class="topbar-left">
+                    <div class="text-center">
+                        <a href="index.html" class="logo"><span>AvaBuddies</span></a>
+                    </div>
                 </div>
-              </li>
-            {{else}}
-              <li class="nav-item">
-                <a href="/auth/signin" class="nav-link">Sign In</a>
-              </li>
-            {{/if}}
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <main role="main" class="container">
-      {{#each error}}
-        <div class="alert alert-danger" role="alert">
-          <p class="mb-3">{{ this.message }}</p>
-          {{#if this.debug }}
-            <pre class="alert-pre border bg-light p-2"><code>{{ this.debug }}</code></pre>
-          {{/if}}
-        </div>
-      {{/each}}
+                <!-- Button mobile view to collapse sidebar menu -->
 
-      {{{body}}}
-    </main>
-  </body>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <ul class="list-inline menu-left mb-0">
+                            <li class="float-left">
+                                <a href="#" class="button-menu-mobile open-left">
+                                    <i class="fa fa-bars"></i>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-right float-right list-inline">
+                            <li class="dropdown open">
+                                <!-- <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="assets/images/users/avatar-1.jpg" alt="user-img" class="rounded-circle"> </a> -->
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0)" class="dropdown-item"><i class="md md-face-unlock mr-2"></i> Profile</a></li>
+                                    <li><a href="javascript:void(0)" class="dropdown-item"><i class="md md-settings-power mr-2"></i> Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <!-- Top Bar End -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+
+            <div class="left side-menu">
+                <div class="sidebar-inner slimscrollleft">
+                    <!--- Divider -->
+                    <div id="sidebar-menu">
+                        <ul>
+                            <li>
+                                <a href="/" class="waves-effect"><i class="md md-home"></i><span> Dashboard </span></a>
+                            </li>
+
+                            <li>
+                                <a href="/users" class="waves-effect"><i class="md-people"></i><span> Users </span></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- Left Sidebar End -->
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid">
+                      {{#each error}}
+                        <div class="alert alert-danger" role="alert">
+                          <p class="mb-3">{{ this }}</p>
+                        </div>
+                      {{/each}}
+
+                      {{{body}}}
+
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <footer class="footer">
+                  footer
+                </footer>
+
+            </div>
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <script>
+            var resizefunc = [];
+        </script>
+
+        <!-- Main  -->
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/js/detect.js"></script>
+        <script src="/assets/js/waves.js"></script>
+
+
+        <script src="/assets/js/jquery.scrollTo.min.js"></script>
+
+        <script src="/assets/pages/switchery/switchery.min.js"></script>
+
+        <script src="/assets/pages/datatables/jquery.dataTables.min.js"></script>
+        <script src="/assets/pages/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="/assets/pages/datatables/datatables.editable.init.js"></script>
+
+        <!-- <script src="/assets/pages/jquery.validate.min.js"></script>
+        <script src="/assets/pages/form-validation-init.js"></script> -->
+
+        <script src="/assets/pages/sweetalert2/sweetalert2.min.js"></script>
+        <script src="/assets/pages/sweetalert2/jquery.sweet-alert.init.js"></script>
+
+        <script src="/assets/js/jquery.app.js"></script>
+
+	</body>
 </html>

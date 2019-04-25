@@ -4,6 +4,17 @@ var router = express.Router();
 var request = require("request");
 var jwt_decode = require('jwt-decode');
 
+
+router.get('/login', function(req, res, next) {
+  let params = {
+    active: { home: true }
+  };
+
+  // res.render('index', params);
+  res.render('index', {params: params, layout: 'login'});
+});
+
+
 /* GET auth callback. */
 router.get(
   "/signin",
@@ -53,9 +64,11 @@ router.post("/signin-backend", function(req, res, next) {
     var objectValue = JSON.parse(body);
     req.app.locals.token = objectValue["token"];
     var decoded = jwt_decode(objectValue["token"]);
-    req.app.locals.isAdmin = decoded.user.isAdmin;
+
+    req.app.locals.user = decoded.user;
+    console.log(req.app.locals.user);
+    res.redirect("/");
   });
-  res.redirect("/");
 });
 
 router.get("/signout", function(req, res) {
