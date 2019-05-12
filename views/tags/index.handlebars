@@ -3,7 +3,7 @@
         <h4 class="pull-left page-title">Dashboard</h4>
         <ol class="breadcrumb pull-right">
             <li><a href="/">Dashboard</a></li>
-            <li class="active">Users</li>
+            <li class="active">Tags</li>
         </ol>
     </div>
 </div>
@@ -15,22 +15,22 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Email</th>
+          <th>Is Private</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        {{#each users.users}}
+        {{#each tags.tags}}
         <tr class="gradeX">
           <td>{{name}}</td>
-          <td>{{email}}</td>
+          <td><input type="checkbox" id="admin" name="isAdmin" data-plugin="switchery" data-color="#FF5815" value="{{isPrivate}}" {{#if isPrivate}} checked {{/if}} disabled/></td>
+
           <td class="actions">
-            <a href="/users/{{_id}}"><i class="md md-remove-red-eye"></i> Show</a>
+            <a href="/tags/{{_id}}"><i class="md md-remove-red-eye"></i> Show</a>
           </td>
         </tr>
         {{/each}}
       </tbody>
     </table>
-
   </div> <!-- end card-body -->
 </div>

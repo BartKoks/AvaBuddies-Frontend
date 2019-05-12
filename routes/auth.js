@@ -46,6 +46,7 @@ router.post(
 );
 
 router.post("/signin-backend", function(req, res, next) {
+  console.log(res.locals.user.email);
   var options = {
     method: "POST",
     url: process.env.API_URL + "/auth/login",
@@ -55,7 +56,7 @@ router.post("/signin-backend", function(req, res, next) {
     },
     form: {
       email: res.locals.user.email,
-      password: "SamplePassword",
+      password: process.env.BACKEND_PASSWORD,
       undefined: undefined
     }
   };
@@ -63,6 +64,7 @@ router.post("/signin-backend", function(req, res, next) {
     if (error) throw new Error(error);
     var objectValue = JSON.parse(body);
     req.app.locals.token = objectValue["token"];
+    console.log(req.app.locals.token);
     var decoded = jwt_decode(objectValue["token"]);
 
     req.app.locals.user = decoded.user;
@@ -74,6 +76,7 @@ router.post("/signin-backend", function(req, res, next) {
 router.get("/signout", function(req, res) {
   req.session.destroy(function(err) {
     req.logout();
+    req.app.locals.user = null;
     res.redirect("/");
   });
 });

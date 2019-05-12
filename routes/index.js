@@ -3,9 +3,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log(req.app.locals.user);
   let params = {
     active: { home: true },
-    user: req.app.user
+    loggedUser: req.app.locals.user
   };
 
   res.render('index', params);
