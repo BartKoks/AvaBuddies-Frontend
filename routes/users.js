@@ -16,6 +16,7 @@ router.get("/", function(req, res, next) {
     }
   };
   request(options, function(error, response, body) {
+    console.log(body);
     if (error) throw new Error(error);
 
     let params = {
@@ -30,6 +31,33 @@ router.get("/", function(req, res, next) {
   });
 });
 
+router.get("/profile", function(req, res, next) {
+  var fullToken = "Bearer " + req.app.locals.token;
+  var fullURL = process.env.API_URL + "/users/profile";
+
+  var options = {
+    method: "GET",
+    url: fullURL,
+    headers: {
+      "cache-control": "no-cache",
+      Authorization: fullToken
+    }
+  };
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+
+    let params = {
+      active: {
+        users: true
+      },
+      user: JSON.parse(body),
+      loggedUser: req.app.locals.user
+    };
+
+    res.render("users/profile", params);
+  });
+
+});
 
 router.get("/:id", function(req, res, next) {
   var fullToken = "Bearer " + req.app.locals.token;
@@ -50,7 +78,7 @@ router.get("/:id", function(req, res, next) {
       active: {
         users: true
       },
-      user: JSON.parse(body).user,
+      user: JSON.parse(body),
       loggedUser: req.app.locals.user
     };
 
@@ -68,7 +96,7 @@ router.post("/:id", function(req, res, next) {
     req.body.isPrivate = false
   }
   var fullToken = "Bearer " + req.app.locals.token;
-  var fullURL = process.env.API_URL + "/users";
+  var fullURL = process.env.API_URL + "/users/" + req.params.id;
 
   var options = {
     method: 'PUT',
@@ -82,6 +110,7 @@ router.post("/:id", function(req, res, next) {
       aboutme: req.body.aboutme,
       isAdmin: req.body.isAdmin,
       isPrivate: req.body.isPrivate,
+      sharelocation: req.body.sharelocation,
       id: req.params.id
     }
   };

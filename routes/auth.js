@@ -64,7 +64,7 @@ router.post("/signin-backend", function(req, res, next) {
     if (error) throw new Error(error);
     var objectValue = JSON.parse(body);
     req.app.locals.token = objectValue["token"];
-    console.log(req.app.locals.token);
+    console.log(objectValue);
     var decoded = jwt_decode(objectValue["token"]);
 
     req.app.locals.user = decoded.user;

@@ -74,7 +74,7 @@ router.get("/:id", function(req, res, next) {
       active: {
         tags: true
       },
-      tag: JSON.parse(body).tag,
+      tag: JSON.parse(body),
       loggedUser: req.app.locals.user
     };
 
@@ -104,7 +104,9 @@ router.delete("/:id", function(req, res, next) {
 router.post("/:id", function(req, res, next) {
   var fullToken = "Bearer " + req.app.locals.token;
   var fullURL = process.env.API_URL + "/tags/"+req.params.id;
-
+  if(!req.body.isPrivate){
+    req.body.isPrivate = false
+  }
   var options = {
     method: 'PUT',
     url: fullURL,
