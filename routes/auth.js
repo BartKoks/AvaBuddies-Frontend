@@ -63,12 +63,10 @@ router.post("/signin-backend", function(req, res, next) {
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
     var objectValue = JSON.parse(body);
-    req.app.locals.token = objectValue["token"];
-    console.log(objectValue);
+    res.cookie('token', objectValue["token"]); 
     var decoded = jwt_decode(objectValue["token"]);
 
-    req.app.locals.user = decoded.user;
-    console.log(req.app.locals.user);
+    res.cookie('user', decoded.user);
     res.redirect("/");
   });
 });
@@ -76,7 +74,8 @@ router.post("/signin-backend", function(req, res, next) {
 router.get("/signout", function(req, res) {
   req.session.destroy(function(err) {
     req.logout();
-    req.app.locals.user = null;
+    res.clearCookie("user");
+    res.clearCookie("token");
     res.redirect("/");
   });
 });

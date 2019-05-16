@@ -5,7 +5,7 @@ var request = require("request");
 /*tags. */
 
 router.post("/", function(req, res, next) {
-  var fullToken = "Bearer " + req.app.locals.token;
+  var fullToken = "Bearer " + req.cookies['token'];
   var fullURL = process.env.API_URL + "/tags";
 
   var options = {
@@ -29,7 +29,7 @@ router.post("/", function(req, res, next) {
 });
 
 router.get("/", function(req, res, next) {
-  var fullToken = "Bearer " + req.app.locals.token;
+  var fullToken = "Bearer " + req.cookies['token'];
   var fullURL = process.env.API_URL + "/tags";
 
   var options = {
@@ -48,7 +48,7 @@ console.log(body);
         tags: true
       },
       tags: JSON.parse(body),
-      loggedUser: req.app.locals.user
+      loggedUser: req.cookies['user']
     };
 
     res.render("tags/index", params);
@@ -56,7 +56,7 @@ console.log(body);
 });
 
 router.get("/:id", function(req, res, next) {
-  var fullToken = "Bearer " + req.app.locals.token;
+  var fullToken = "Bearer " + req.cookies['token'];
   var fullURL = process.env.API_URL + "/tags/" + req.params.id;
 
   var options = {
@@ -75,7 +75,7 @@ router.get("/:id", function(req, res, next) {
         tags: true
       },
       tag: JSON.parse(body),
-      loggedUser: req.app.locals.user
+      loggedUser: req.cookies['user']
     };
 
     res.render("tags/show", params);
@@ -83,7 +83,7 @@ router.get("/:id", function(req, res, next) {
 });
 
 router.delete("/:id", function(req, res, next) {
-  var fullToken = "Bearer " + req.app.locals.token;
+  var fullToken = "Bearer " + req.cookies['token'];
   var fullURL = process.env.API_URL + "/tags/"+req.params.id;
   console.log(fullURL);
 
@@ -102,7 +102,7 @@ router.delete("/:id", function(req, res, next) {
 });
 
 router.post("/:id", function(req, res, next) {
-  var fullToken = "Bearer " + req.app.locals.token;
+  var fullToken = "Bearer " + req.cookies['token'];
   var fullURL = process.env.API_URL + "/tags/"+req.params.id;
   if(!req.body.isPrivate){
     req.body.isPrivate = false

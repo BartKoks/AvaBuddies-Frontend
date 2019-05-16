@@ -96,7 +96,7 @@ var app = express();
 
 
 function checkUser(req, res, next) {
-  if(app.locals.user && app.locals.user.isAdmin){
+  if(req.cookies['user'] && req.cookies['user'].isAdmin){
     next();
   }
   else{

@@ -4,7 +4,7 @@ var request = require("request");
 
 /* GET users listing. */
 router.get("/", function(req, res, next) {
-  var fullToken = "Bearer " + req.app.locals.token;
+  var fullToken = "Bearer " + req.cookies['token'];
   var fullURL = process.env.API_URL + "/users";
 
   var options = {
@@ -24,7 +24,7 @@ router.get("/", function(req, res, next) {
         users: true
       },
       users: JSON.parse(body),
-      loggedUser: req.app.locals.user
+      loggedUser: req.cookies['user']
     };
 
     res.render("users/index", params);
@@ -32,7 +32,7 @@ router.get("/", function(req, res, next) {
 });
 
 router.get("/profile", function(req, res, next) {
-  var fullToken = "Bearer " + req.app.locals.token;
+  var fullToken = "Bearer " + req.cookies['token'];
   var fullURL = process.env.API_URL + "/users/profile";
 
   var options = {
@@ -51,7 +51,7 @@ router.get("/profile", function(req, res, next) {
         users: true
       },
       user: JSON.parse(body),
-      loggedUser: req.app.locals.user
+      loggedUser: req.cookies['user']
     };
 
     res.render("users/profile", params);
@@ -60,7 +60,7 @@ router.get("/profile", function(req, res, next) {
 });
 
 router.get("/:id", function(req, res, next) {
-  var fullToken = "Bearer " + req.app.locals.token;
+  var fullToken = "Bearer " + req.cookies['token'];
   var fullURL = process.env.API_URL + "/users/" + req.params.id;
 
   var options = {
@@ -79,7 +79,7 @@ router.get("/:id", function(req, res, next) {
         users: true
       },
       user: JSON.parse(body),
-      loggedUser: req.app.locals.user
+      loggedUser: req.cookies['user']
     };
 
     res.render("users/show", params);
@@ -95,7 +95,7 @@ router.post("/:id", function(req, res, next) {
   if (!req.body.isPrivate) {
     req.body.isPrivate = false
   }
-  var fullToken = "Bearer " + req.app.locals.token;
+  var fullToken = "Bearer " + req.cookies['token'];
   var fullURL = process.env.API_URL + "/users/" + req.params.id;
 
   var options = {
@@ -124,7 +124,7 @@ router.post("/:id", function(req, res, next) {
 });
 
 router.delete("/:id", function(req, res, next) {
-  var fullToken = "Bearer " + req.app.locals.token;
+  var fullToken = "Bearer " + req.cookies['token'];
   var fullURL = process.env.API_URL + "/users/"+req.params.id;
   console.log(fullURL);
   var options = {
