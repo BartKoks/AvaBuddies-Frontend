@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-12">
-        <h4 class="pull-left page-title">Dashboard</h4>
+        <h4 class="pull-left page-title">Tags</h4>
         <ol class="breadcrumb pull-right">
             <li><a href="/">Dashboard</a></li>
             <li class="active">Tags</li>
@@ -9,8 +9,16 @@
 </div>
 
 
+
 <div class="card">
   <div class="card-body">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="m-b-30">
+                <a href="/tags/create" class="btn btn-success waves-effect waves-light">Add <i class="md md-add-circle-outline"></i></a>
+            </div>
+        </div>
+    </div>
     <table class="table table-striped add-edit-table dt-responsive nowrap" id="datatable-editable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
       <thead>
         <tr>
@@ -23,7 +31,7 @@
         {{#each tags.tags}}
         <tr class="gradeX">
           <td>{{name}}</td>
-          <td><input type="checkbox" id="admin" name="isAdmin" data-plugin="switchery" data-color="#FF5815" value="{{isPrivate}}" {{#if isPrivate}} checked {{/if}} disabled/></td>
+          <td><input type="checkbox" data-plugin="switchery" data-color="#FF5815" value="{{isPrivate}}" {{#if isPrivate}} checked {{/if}} disabled/></td>
 
           <td class="actions">
             <a href="/tags/{{_id}}"><i class="md md-remove-red-eye"></i> Show</a>

@@ -12,22 +12,22 @@
 <div class="col-sm-12">
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Show Tag</h3>
+      <h3 class="card-title">Create Tag</h3>
     </div>
     <div class="card-body">
       <div class="form">
-        <form class="cmxform form-horizontal tasi-form" id="userForm" method="post" novalidate="novalidate">
+        <form class="cmxform form-horizontal tasi-form" id="userForm" action="/tags" method="post" novalidate="novalidate">
           <div class="form-group row">
             <label for="name" class="control-label col-lg-2">Name</label>
             <div class="col-lg-10">
-              <input class="form-control" id="name" name="name" value="{{tag.name}}" type="text" readonly>
+              <input class="form-control" id="name" name="name" value="{{tag.name}}" type="text">
             </div>
           </div>
 
           <div class="form-group row">
             <label for="private" class="control-label col-lg-2">Private profile</label>
             <div class="col-lg-10">
-              <input type="checkbox" id="private" name="isPrivate" data-plugin="switchery" data-color="#FF5815" value="true" {{#if tag.isPrivate}} checked {{/if}}/>
+              <input type="checkbox" id="private" name="isPrivate" data-plugin="switchery" data-color="#FF5815" value="true"/>
 
             </div>
           </div>
@@ -38,8 +38,6 @@
         <div class="offset-lg-2 col-lg-10">
           <button class="btn btn-success waves-effect waves-light" type="submit">Save</button>
           <a href="/tags" class="btn btn-secondary waves-effect" type="button">Cancel</a>
-
-          <button type="button" class="btn btn-pink waves-effect float-right" data-id="{{tag._id}}" id="satags-params">Delete</button>
         </div>
       </div>
       </form>

@@ -8,6 +8,10 @@ router.post("/", function(req, res, next) {
   var fullToken = "Bearer " + req.cookies['token'];
   var fullURL = process.env.API_URL + "/tags";
 
+  if(!req.body.isPrivate){
+    req.body.isPrivate = false
+  }
+
   var options = {
     method: 'POST',
     url: fullURL,
@@ -23,7 +27,10 @@ router.post("/", function(req, res, next) {
 
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
-    res.redirect("/tags/"+req.params.id);
+
+    var result = JSON.parse(body);
+
+    res.redirect("/tags/"+result._id);
   });
 
 });
@@ -42,7 +49,6 @@ router.get("/", function(req, res, next) {
   };
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
-console.log(body);
     let params = {
       active: {
         tags: true
@@ -53,6 +59,17 @@ console.log(body);
 
     res.render("tags/index", params);
   });
+});
+
+router.get("/create", function(req, res, next) {
+    let params = {
+      active: {
+        tags: true
+      },
+      loggedUser: req.cookies['user']
+    };
+
+    res.render("tags/create", params);
 });
 
 router.get("/:id", function(req, res, next) {
@@ -126,5 +143,4 @@ router.post("/:id", function(req, res, next) {
   });
 
 });
-
 module.exports = router;

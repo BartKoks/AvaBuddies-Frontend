@@ -46,7 +46,6 @@ router.post(
 );
 
 router.post("/signin-backend", function(req, res, next) {
-  console.log(res.locals.user.email);
   var options = {
     method: "POST",
     url: process.env.API_URL + "/auth/login",
@@ -63,11 +62,21 @@ router.post("/signin-backend", function(req, res, next) {
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
     var objectValue = JSON.parse(body);
-    res.cookie('token', objectValue["token"]); 
-    var decoded = jwt_decode(objectValue["token"]);
+    res.cookie('token', objectValue["token"]);
+    if (!objectValue["token"]) {
+      console.log("notoken");
+      res.redirect("/auth/login");
+    } else {
+      var decoded = jwt_decode(objectValue["token"]);
+      res.cookie('user', decoded.user);
 
-    res.cookie('user', decoded.user);
-    res.redirect("/");
+      if (decoded.user.email.split('@')[1] == 'projectsoa.onmicrosoft.com') {
+        res.redirect("/");
+      } else {
+        res.redirect("/auth/login");
+      }
+
+    }
   });
 });
 
