@@ -89,13 +89,14 @@ passport.use(new OIDCStrategy(
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var tagsRouter = require('./routes/tags');
 var authRouter = require('./routes/auth');
 
 var app = express();
 
 
 function checkUser(req, res, next) {
-  if(app.locals.user && app.locals.user.isAdmin){
+  if(req.cookies['user'] && req.cookies['user'].isAdmin){
     next();
   }
   else{
@@ -164,6 +165,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use('/tags', checkUser, tagsRouter);
 app.use('/users', checkUser, usersRouter);
 app.use('/auth', authRouter);
 app.use('/', checkUser, indexRouter);

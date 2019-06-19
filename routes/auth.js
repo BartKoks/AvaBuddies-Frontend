@@ -55,25 +55,36 @@ router.post("/signin-backend", function(req, res, next) {
     },
     form: {
       email: res.locals.user.email,
-      password: "SamplePassword",
+      password: process.env.BACKEND_PASSWORD,
       undefined: undefined
     }
   };
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
     var objectValue = JSON.parse(body);
-    req.app.locals.token = objectValue["token"];
-    var decoded = jwt_decode(objectValue["token"]);
+    res.cookie('token', objectValue["token"]);
+    if (!objectValue["token"]) {
+      console.log("notoken");
+      res.redirect("/auth/login");
+    } else {
+      var decoded = jwt_decode(objectValue["token"]);
+      res.cookie('user', decoded.user);
 
-    req.app.locals.user = decoded.user;
-    console.log(req.app.locals.user);
-    res.redirect("/");
+      if (decoded.user.email.split('@')[1] == 'projectsoa.onmicrosoft.com') {
+        res.redirect("/");
+      } else {
+        res.redirect("/auth/login");
+      }
+
+    }
   });
 });
 
 router.get("/signout", function(req, res) {
   req.session.destroy(function(err) {
     req.logout();
+    res.clearCookie("user");
+    res.clearCookie("token");
     res.redirect("/");
   });
 });

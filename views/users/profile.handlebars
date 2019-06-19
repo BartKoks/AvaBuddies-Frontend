@@ -13,7 +13,7 @@
 <div class="col-sm-12">
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Show User</h3>
+      <h3 class="card-title">My Profile</h3>
     </div>
     <div class="card-body">
       <div class="form">
@@ -58,7 +58,7 @@
           <div class="form-group row">
             <label for="location" class="control-label col-lg-2">Share Location</label>
             <div class="col-lg-10">
-              <input disabled type="checkbox" id="location" name="sharelocation" data-plugin="switchery" data-color="#FF5815" value="true" {{#if user.sharelocation}} checked {{/if}}/>
+              <input type="checkbox" id="location" name="sharelocation" data-plugin="switchery" data-color="#FF5815" value="true" {{#if user.sharelocation}} checked {{/if}}/>
 
             </div>
           </div>
@@ -69,8 +69,6 @@
         <div class="offset-lg-2 col-lg-10">
           <button class="btn btn-success waves-effect waves-light" type="submit">Save</button>
           <a href="/users" class="btn btn-secondary waves-effect" type="button">Cancel</a>
-
-          <button type="button" class="btn btn-pink waves-effect float-right" data-id="{{user._id}}" id="sa-params">Delete</button>
         </div>
       </div>
       </form>

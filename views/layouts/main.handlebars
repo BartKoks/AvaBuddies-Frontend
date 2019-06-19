@@ -50,10 +50,10 @@
 
                         <ul class="nav navbar-right float-right list-inline">
                             <li class="dropdown open">
-                                <!-- <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="assets/images/users/avatar-1.jpg" alt="user-img" class="rounded-circle"> </a> -->
+                                <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true">{{loggedUser.email}}</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="javascript:void(0)" class="dropdown-item"><i class="md md-face-unlock mr-2"></i> Profile</a></li>
-                                    <li><a href="javascript:void(0)" class="dropdown-item"><i class="md md-settings-power mr-2"></i> Logout</a></li>
+                                    <li><a href="/users/profile" class="dropdown-item"><i class="md md-face-unlock mr-2"></i> Profile</a></li>
+                                    <li><a href="/auth/signout" class="dropdown-item"><i class="md md-settings-power mr-2"></i> Logout</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -75,6 +75,9 @@
 
                             <li>
                                 <a href="/users" class="waves-effect"><i class="md-people"></i><span> Users </span></a>
+                            </li>
+                            <li>
+                                <a href="/tags" class="waves-effect"><i class="md-label"></i><span> Tags </span></a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
