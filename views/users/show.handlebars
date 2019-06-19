@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">Users</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/Users">Users</a></li>
+            <li class="active">{{user.name}}</li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="col-sm-12">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Show User</h3>
+    </div>
+    <div class="card-body">
+      <div class="form">
+        <form class="cmxform form-horizontal tasi-form" id="userForm" method="post" novalidate="novalidate">
+          <div class="form-group row">
+            <label for="name" class="control-label col-lg-2">Name *</label>
+            <div class="col-lg-10">
+              <input class="form-control" id="name" name="name" value="{{user.name}}" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="email" class="control-label col-lg-2">Email</label>
+            <div class="col-lg-10">
+              <input class="form-control" id="email" name="email" value="{{user.email}}" type="email" disabled>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-2 control-label" for="aboutme">About me</label>
+            <div class="col-md-10">
+              <textarea class="form-control" rows="5" name="aboutme" id="aboutme">{{user.aboutme}}</textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="private" class="control-label col-lg-2">Private profile</label>
+            <div class="col-lg-10">
+              <input type="checkbox" id="private" name="isPrivate" data-plugin="switchery" data-color="#FF5815" value="true" {{#if user.isPrivate}} checked {{/if}}/>
+
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label for="admin" class="control-label col-lg-2">Administrator</label>
+            <div class="col-lg-10">
+              <input type="checkbox" id="admin" name="isAdmin" data-plugin="switchery" data-color="#FF5815" value="true" {{#if user.isAdmin}} checked {{/if}}/>
+
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="location" class="control-label col-lg-2">Share Location</label>
+            <div class="col-lg-10">
+              <input disabled type="checkbox" id="location" name="sharelocation" data-plugin="switchery" data-color="#FF5815" value="true" {{#if user.sharelocation}} checked {{/if}}/>
+
+            </div>
+          </div>
+      </div>
+
+
+      <div class="form-group">
+        <div class="offset-lg-2 col-lg-10">
+          <button class="btn btn-success waves-effect waves-light" type="submit">Save</button>
+          <a href="/users" class="btn btn-secondary waves-effect" type="button">Cancel</a>
+
+          <button type="button" class="btn btn-pink waves-effect float-right" data-id="{{user._id}}" id="sa-params">Delete</button>
+        </div>
+      </div>
+      </form>
+    </div> <!-- .form -->
+
+  </div> <!-- card-body -->
+</div> <!-- card -->

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>AvaBuddies - AdminPanel</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <link rel="shortcut icon" href="assets/images/favicon_1.ico">
+
+        <!-- Custom Files -->
+        <link href="/assets/pages/switchery/switchery.min.css" rel="stylesheet">
+        <link href="/assets/pages/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/icons.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
+
+        <script src="/assets/js/modernizr.min.js"></script>
+
+    </head>
+
+
+    <body class="fixed-left">
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Top Bar Start -->
+            <div class="topbar">
+                <!-- LOGO -->
+                <div class="topbar-left">
+                    <div class="text-center">
+                        <a href="index.html" class="logo"><span>AvaBuddies</span></a>
+                    </div>
+                </div>
+                <!-- Button mobile view to collapse sidebar menu -->
+
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <ul class="list-inline menu-left mb-0">
+                            <li class="float-left">
+                                <a href="#" class="button-menu-mobile open-left">
+                                    <i class="fa fa-bars"></i>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-right float-right list-inline">
+                            <li class="dropdown open">
+                                <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true">{{loggedUser.email}}</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/users/profile" class="dropdown-item"><i class="md md-face-unlock mr-2"></i> Profile</a></li>
+                                    <li><a href="/auth/signout" class="dropdown-item"><i class="md md-settings-power mr-2"></i> Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <!-- Top Bar End -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+
+            <div class="left side-menu">
+                <div class="sidebar-inner slimscrollleft">
+                    <!--- Divider -->
+                    <div id="sidebar-menu">
+                        <ul>
+                            <li>
+                                <a href="/" class="waves-effect"><i class="md md-home"></i><span> Dashboard </span></a>
+                            </li>
+
+                            <li>
+                                <a href="/users" class="waves-effect"><i class="md-people"></i><span> Users </span></a>
+                            </li>
+                            <li>
+                                <a href="/tags" class="waves-effect"><i class="md-label"></i><span> Tags </span></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- Left Sidebar End -->
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid">
+                      {{#each error}}
+                        <div class="alert alert-danger" role="alert">
+                          <p class="mb-3">{{ this }}</p>
+                        </div>
+                      {{/each}}
+
+                      {{{body}}}
+
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <footer class="footer">
+                  footer
+                </footer>
+
+            </div>
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <script>
+            var resizefunc = [];
+        </script>
+
+        <!-- Main  -->
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/js/detect.js"></script>
+        <script src="/assets/js/waves.js"></script>
+
+
+        <script src="/assets/js/jquery.scrollTo.min.js"></script>
+
+        <script src="/assets/pages/switchery/switchery.min.js"></script>
+
+        <script src="/assets/pages/datatables/jquery.dataTables.min.js"></script>
+        <script src="/assets/pages/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="/assets/pages/datatables/datatables.editable.init.js"></script>
+
+        <!-- <script src="/assets/pages/jquery.validate.min.js"></script>
+        <script src="/assets/pages/form-validation-init.js"></script> -->
+
+        <script src="/assets/pages/sweetalert2/sweetalert2.min.js"></script>
+        <script src="/assets/pages/sweetalert2/jquery.sweet-alert.init.js"></script>
+
+        <script src="/assets/js/jquery.app.js"></script>
+
+	</body>
+</html>

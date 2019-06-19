@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">Users</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="/">Dashboard</a></li>
+            <li class="active">Users</li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="card">
+  <div class="card-body">
+    <table class="table table-striped add-edit-table dt-responsive nowrap" id="datatable-editable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each users.users}}
+        <tr class="gradeX">
+          <td>{{name}}</td>
+          <td>{{email}}</td>
+          <td class="actions">
+            <a href="/users/{{_id}}"><i class="md md-remove-red-eye"></i> Show</a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+  </div> <!-- end card-body -->
+</div>
