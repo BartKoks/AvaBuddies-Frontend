@@ -2,10 +2,41 @@ var express = require("express");
 var router = express.Router();
 var request = require("request");
 
-/* GET users listing. */
+/*challenges. */
+
+router.post("/", function(req, res, next) {
+  var fullToken = "Bearer " + req.cookies['token'];
+  var fullURL = process.env.API_URL + "/challenges";
+
+  var options = {
+    method: 'POST',
+    url: fullURL,
+    headers: {
+      "cache-control": "no-cache",
+      Authorization: fullToken
+    },
+    form: {
+      title: req.body.title,
+      description: req.body.description,
+      task: req.body.task,
+      amount: req.body.amount,
+      image: req.body.image
+    }
+  };
+
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+
+    var result = JSON.parse(body);
+
+    res.redirect("/challenges/"+result._id);
+  });
+
+});
+
 router.get("/", function(req, res, next) {
   var fullToken = "Bearer " + req.cookies['token'];
-  var fullURL = process.env.API_URL + "/users";
+  var fullURL = process.env.API_URL + "/challenges";
 
   var options = {
     method: "GET",
@@ -17,50 +48,32 @@ router.get("/", function(req, res, next) {
   };
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
-
     let params = {
       active: {
-        users: true
+        challenges: true
       },
-      users: JSON.parse(body),
+      challenges: JSON.parse(body),
       loggedUser: req.cookies['user']
     };
 
-    res.render("users/index", params);
+    res.render("challenges/index", params);
   });
 });
 
-router.get("/profile", function(req, res, next) {
-  var fullToken = "Bearer " + req.cookies['token'];
-  var fullURL = process.env.API_URL + "/users/profile";
-
-  var options = {
-    method: "GET",
-    url: fullURL,
-    headers: {
-      "cache-control": "no-cache",
-      Authorization: fullToken
-    }
-  };
-  request(options, function(error, response, body) {
-    if (error) throw new Error(error);
-
+router.get("/create", function(req, res, next) {
     let params = {
       active: {
-        users: true
+        challenges: true
       },
-      user: JSON.parse(body),
       loggedUser: req.cookies['user']
     };
 
-    res.render("users/profile", params);
-  });
-
+    res.render("challenges/create", params);
 });
 
 router.get("/:id", function(req, res, next) {
   var fullToken = "Bearer " + req.cookies['token'];
-  var fullURL = process.env.API_URL + "/users/" + req.params.id;
+  var fullURL = process.env.API_URL + "/challenges/" + req.params.id;
 
   var options = {
     method: "GET",
@@ -72,62 +85,24 @@ router.get("/:id", function(req, res, next) {
   };
   request(options, function(error, response, body) {
     body = JSON.parse(body);
-    
     if (error) throw new Error(error);
-
     let params = {
       active: {
-        users: true
+        challenges: true
       },
-      user: body[0],
+      challenge: body[0],
       loggedUser: req.cookies['user']
     };
 
-    res.render("users/show", params);
+    res.render("challenges/show", params);
   });
-
-});
-
-
-router.post("/:id", function(req, res, next) {
-  if (!req.body.isAdmin) {
-    req.body.isAdmin = false
-  }
-  if (!req.body.isPrivate) {
-    req.body.isPrivate = false
-  }
-  var fullToken = "Bearer " + req.cookies['token'];
-  var fullURL = process.env.API_URL + "/users/" + req.params.id;
-
-  var options = {
-    method: 'PUT',
-    url: fullURL,
-    headers: {
-      "cache-control": "no-cache",
-      Authorization: fullToken
-    },
-    form: {
-      name: req.body.name,
-      aboutme: req.body.aboutme,
-      isAdmin: req.body.isAdmin,
-      isPrivate: req.body.isPrivate,
-      sharelocation: req.body.sharelocation,
-      id: req.params.id
-    }
-  };
-
-  request(options, function(error, response, body) {
-    if (error) throw new Error(error);
-
-    res.redirect("/users/"+req.params.id);
-  });
-
 });
 
 router.delete("/:id", function(req, res, next) {
   var fullToken = "Bearer " + req.cookies['token'];
-  var fullURL = process.env.API_URL + "/users/"+req.params.id;
+  var fullURL = process.env.API_URL + "/challenges/"+req.params.id;
   console.log(fullURL);
+
   var options = {
     method: "DELETE",
     url: fullURL,
@@ -142,4 +117,32 @@ router.delete("/:id", function(req, res, next) {
   });
 });
 
+router.post("/:id", function(req, res, next) {
+  var fullToken = "Bearer " + req.cookies['token'];
+  var fullURL = process.env.API_URL + "/challenges/"+req.params.id;
+  if(!req.body.isPrivate){
+    req.body.isPrivate = false
+  }
+  var options = {
+    method: 'PUT',
+    url: fullURL,
+    headers: {
+      "cache-control": "no-cache",
+      Authorization: fullToken
+    },
+    form: {
+      title: req.body.title,
+      description: req.body.description,
+      task: req.body.task,
+      amount: req.body.amount,
+      image: req.body.image
+    }
+  };
+
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+    res.redirect("/challenges/"+req.params.id);
+  });
+
+});
 module.exports = router;

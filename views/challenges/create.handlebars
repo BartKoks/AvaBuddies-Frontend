@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">Tags</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/Tags">Tags</a></li>
+            <li class="active">{{tag.name}}</li>
+        </ol>
+    </div>
+</div>
+
+<div class="col-sm-12">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Create Tag</h3>
+    </div>
+    <div class="card-body">
+      <div class="form">
+        <form class="cmxform form-horizontal tasi-form" id="userForm" action="/challenges" method="post" novalidate="novalidate">
+          <div class="form-group row">
+            <label for="name" class="control-label col-lg-2">Title</label>
+            <div class="col-lg-10">
+              <input class="form-control" id="title" name="title" value="{{challenge.title}}" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="name" class="control-label col-lg-2">Description</label>
+            <div class="col-lg-10">
+              <input class="form-control" id="description" name="description" value="{{challenge.description}}" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="name" class="control-label col-lg-2">Task</label>
+            <div class="col-lg-10">
+              <input class="form-control" id="task" name="task" value="{{challenge.task}}" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="name" class="control-label col-lg-2">Amount</label>
+            <div class="col-lg-10">
+              <input class="form-control" id="amount" name="amount" value="{{challenge.amount}}" type="number">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="name" class="control-label col-lg-2">image</label>
+            <div class="col-lg-10">
+              <input class="form-control" id="image" name="image" value="{{challenge.image}}" type="file">
+            </div>
+          </div>
+
+      </div>
+
+
+      <div class="form-group">
+        <div class="offset-lg-2 col-lg-10">
+          <button class="btn btn-success waves-effect waves-light" type="submit">Save</button>
+          <a href="/challenges" class="btn btn-secondary waves-effect" type="button">Cancel</a>
+        </div>
+      </div>
+      </form>
+    </div> <!-- .form -->
+
+  </div> <!-- card-body -->
+</div> <!-- card -->

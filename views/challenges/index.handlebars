@@ -15,26 +15,27 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="m-b-30">
-                <a href="/tags/create" class="btn btn-success waves-effect waves-light">Add <i class="md md-add-circle-outline"></i></a>
+                <a href="/challenges/create" class="btn btn-success waves-effect waves-light">Add <i class="md md-add-circle-outline"></i></a>
             </div>
         </div>
     </div>
     <table class="table table-striped add-edit-table dt-responsive nowrap" id="datatable-editable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Is Private</th>
-          <th>Actions</th>
+          <th>Title</th>
+          <th>Task</th>
+          <th>Amount</th>
         </tr>
       </thead>
       <tbody>
-        {{#each tags}}
+        {{#each challenges}}
         <tr class="gradeX">
-          <td>{{name}}</td>
-          <td><input type="checkbox" data-plugin="switchery" data-color="#FF5815" value="{{isPrivate}}" {{#if isPrivate}} checked {{/if}} disabled/></td>
+          <td>{{title}}</td>
+          <td>{{task}}</td>
+          <td>{{amount}}</td>
 
           <td class="actions">
-            <a href="/tags/{{_id}}"><i class="md md-remove-red-eye"></i> Show</a>
+            <a href="/challenges/{{_id}}"><i class="md md-remove-red-eye"></i> Show</a>
           </td>
         </tr>
         {{/each}}
