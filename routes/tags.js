@@ -48,6 +48,7 @@ router.get("/", function(req, res, next) {
     }
   };
   request(options, function(error, response, body) {
+    console.log(body);
     if (error) throw new Error(error);
     let params = {
       active: {
@@ -85,8 +86,8 @@ router.get("/:id", function(req, res, next) {
     }
   };
   request(options, function(error, response, body) {
+
     if (error) throw new Error(error);
-    console.log(body);
     let params = {
       active: {
         tags: true

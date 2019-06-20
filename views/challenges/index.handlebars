@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">Challenges</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="/">Dashboard</a></li>
+            <li class="active">Challenges</li>
+        </ol>
+    </div>
+</div>
+
+
+
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="m-b-30">
+                <a href="/challenges/create" class="btn btn-success waves-effect waves-light">Add <i class="md md-add-circle-outline"></i></a>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped add-edit-table dt-responsive nowrap" id="datatable-editable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Task</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each challenges.challenges}}
+        <tr class="gradeX">
+          <td>{{title}}</td>
+          <td>{{task}}</td>
+
+          <td class="actions">
+            <a href="/challenges/{{_id}}"><i class="md md-remove-red-eye"></i> Show</a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div> <!-- end card-body -->
+</div>
