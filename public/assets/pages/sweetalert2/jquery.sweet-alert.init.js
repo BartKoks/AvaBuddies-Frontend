@@ -49,7 +49,7 @@
         var id = $(this).attr("data-id")
         swal({
             title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this tags!",
+            text: "Once deleted, you will not be able to recover this tag!",
             icon: "warning",
             buttons: ['Cancel', 'Delete'],
             dangerMode: true,
@@ -74,11 +74,11 @@
           });
       });
 
-      $('#sachallenges-params').click(function() {
+      $('#sachallenge-params').click(function() {
         var id = $(this).attr("data-id")
         swal({
             title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this tags!",
+            text: "You will not be able to recover this challenge!",
             icon: "warning",
             buttons: ['Cancel', 'Delete'],
             dangerMode: true,
@@ -91,14 +91,14 @@
               // });
               $.ajax({
                 type: "DELETE",
-                url: "/tags/" + id,
+                url: "/challenges/" + id,
                 success: function(result) {
-                  window.location.replace("/tags");
+                  window.location.replace("/challenges");
                 }
               });
 
             } else {
-              swal("This tag will not be deleted!");
+              swal("This challenge will not be deleted!");
             }
           });
       });
