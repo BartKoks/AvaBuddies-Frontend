@@ -44,11 +44,12 @@
             }
           });
       });
+
       $('#satags-params').click(function() {
         var id = $(this).attr("data-id")
         swal({
             title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this user!",
+            text: "Once deleted, you will not be able to recover this tags!",
             icon: "warning",
             buttons: ['Cancel', 'Delete'],
             dangerMode: true,
@@ -68,7 +69,36 @@
               });
 
             } else {
-              swal("This user will not be deleted!");
+              swal("This tag will not be deleted!");
+            }
+          });
+      });
+
+      $('#sachallenges-params').click(function() {
+        var id = $(this).attr("data-id")
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this tags!",
+            icon: "warning",
+            buttons: ['Cancel', 'Delete'],
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+
+              // swal("This user has been deleted!", {
+              //   icon: "success",
+              // });
+              $.ajax({
+                type: "DELETE",
+                url: "/tags/" + id,
+                success: function(result) {
+                  window.location.replace("/tags");
+                }
+              });
+
+            } else {
+              swal("This tag will not be deleted!");
             }
           });
       });

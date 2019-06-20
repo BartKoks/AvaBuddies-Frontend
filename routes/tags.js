@@ -48,6 +48,7 @@ router.get("/", function(req, res, next) {
     }
   };
   request(options, function(error, response, body) {
+    console.log(body);
     if (error) throw new Error(error);
     let params = {
       active: {
@@ -85,13 +86,13 @@ router.get("/:id", function(req, res, next) {
     }
   };
   request(options, function(error, response, body) {
-    body = JSON.parse(body);
+
     if (error) throw new Error(error);
     let params = {
       active: {
         tags: true
       },
-      tag: body[0],
+      tag: JSON.parse(body),
       loggedUser: req.cookies['user']
     };
 

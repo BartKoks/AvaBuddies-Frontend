@@ -84,13 +84,12 @@ router.get("/:id", function(req, res, next) {
     }
   };
   request(options, function(error, response, body) {
-    body = JSON.parse(body);
     if (error) throw new Error(error);
     let params = {
       active: {
         challenges: true
       },
-      challenge: body[0],
+      challenge: JSON.parse(body),
       loggedUser: req.cookies['user']
     };
 

@@ -28,7 +28,7 @@
         </tr>
       </thead>
       <tbody>
-        {{#each tags}}
+        {{#each tags.tags}}
         <tr class="gradeX">
           <td>{{name}}</td>
           <td><input type="checkbox" data-plugin="switchery" data-color="#FF5815" value="{{isPrivate}}" {{#if isPrivate}} checked {{/if}} disabled/></td>
