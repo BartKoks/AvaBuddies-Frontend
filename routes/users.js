@@ -71,15 +71,13 @@ router.get("/:id", function(req, res, next) {
     }
   };
   request(options, function(error, response, body) {
-    body = JSON.parse(body);
-    
     if (error) throw new Error(error);
 
     let params = {
       active: {
         users: true
       },
-      user: body[0],
+      user: JSON.parse(body),
       loggedUser: req.cookies['user']
     };
 
